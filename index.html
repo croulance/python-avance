@@ -130,7 +130,7 @@ Q(OUT,
     def __radd__(self, other):
         return "radd"
 
-print(1 + M())`,["radd","Rien : TypeError","1","NotImplemented"],"int ne sait pas additionner un M : int.__add__ renvoie NotImplemented. Python essaie alors la méthode réfléchie de l'opérande de droite, M.__radd__, qui renvoie radd. Il n'y aurait TypeError que si M ne définissait pas __radd__."),
+print(1 + M())`,["radd","Rien : TypeError","1","NotImplemented"],"1 + M() est traduit en appel de méthode, et sa valeur est ce que la méthode renvoie. int.__add__(1, m) ne connaît pas M et renvoie NotImplemented. Python appelle alors M.__radd__(m, 1) : other vaut 1, mais cette méthode l'ignore et renvoie la chaîne radd, qui devient le résultat de l'expression. Aucune addition entre 1 et une chaîne n'a lieu. Sans __radd__, on obtiendrait TypeError."),
 N("__eq__ et __hash__ vont ensemble","Un <code>set</code> ou un <code>dict</code> retrouve un élément grâce à son hash, puis confirme avec <code>==</code>. D'où le contrat : deux objets égaux doivent avoir le même hash. Pour éviter de le violer par accident, Python met <code>__hash__</code> à <code>None</code> dès qu'une classe définit <code>__eq__</code> sans définir <code>__hash__</code> : ses instances ne sont alors plus hachables. Une classe qui ne définit ni l'un ni l'autre est comparée et hachée par identité.<br><br>Conséquence du contrat : des nombres égaux ont le même hash, quel que soit leur type. <code>1</code>, <code>1.0</code> et <code>True</code> sont donc une seule et même clé. Écrire dans un dict avec une clé égale à une clé existante conserve la clé d'origine et remplace seulement la valeur : <code>{True: 'a', 1: 'b'}</code> donne <code>{True: 'b'}</code>.",
 `class P:
     def __init__(self, x): self.x = x
