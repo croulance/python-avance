@@ -1,5 +1,5 @@
 // Cache hors ligne de l'app. Changer VERSION à chaque mise à jour force le rafraîchissement.
-const VERSION = "pyadv-1";
+const VERSION = "pyadv-3";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-maskable-512.png"];
 
 self.addEventListener("install", e => {
